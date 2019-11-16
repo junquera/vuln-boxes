@@ -1,0 +1,23 @@
+version: "3"
+services:
+  web:
+    build: .
+    dockerfile: Dockerfile-web
+    ports:
+      - "8080:80"
+    links:
+      - "db:database"
+    networks:
+      - frontend
+      - backend
+  db:
+    build: .
+    dockerfile: Dodckerfile-db
+    networks:
+      - backend
+
+networks:
+  frontend:
+    name: front
+  backend:
+    name: back
