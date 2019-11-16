@@ -1,0 +1,30 @@
+# https://hub.docker.com/r/hmlio/vaas-cve-2014-6271/dockerfile
+from ubuntu:16.04
+
+RUN apt-get update -y
+RUN apt-get dist-upgrade -y
+
+RUN apt-get install -y apache2
+RUN apt-get install -y wget
+
+RUN wget http://snapshot.debian.org/archive/debian/20130101T091755Z/pool/main/b/bash/bash_4.2%2Bdfsg-0.1_amd64.deb -O /tmp/bash_4.2+dfsg-0.1_amd64.deb && \
+ dpkg -i /tmp/bash_4.2+dfsg-0.1_amd64.deb
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# Setup vulnerable web content
+ADD index.html /var/www/html
+ADD howiam /usr/lib/cgi-bin/
+RUN cd /etc/apache2/mods-enabled && ln -s ../mods-available/cgi.load
+RUN chown www-data:www-data /usr/lib/cgi-bin/howiam
+RUN chmod u+x /usr/lib/cgi-bin/howiam
+
+# Clean up 
+RUN apt-get autoremove
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Expose the port for usage with the docker -P switch
+EXPOSE 80
+
+# Run Apache 2
+CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
