@@ -10,21 +10,29 @@ services:
       - db
     links:
       - db
-    environment:
-      - DB_ADDR: db
     networks:
-      - frontend
-      - backend
+      frontend:
+        ipv4_address: 172.18.0.2
+      backend:
+        ipv4_address: 172.18.1.2
   db:
     image: postgres
     volumes:
-      - ./init_pg.sh:/docker-entrypoint-initdb.d/init.sh
-      # - ./pg_config:/pg_config
+      - ./pg_init/:/docker-entrypoint-initdb.d/
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.18.1.3
 networks:
   frontend:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.18.0.0/24"
   backend:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.18.1.0/24"

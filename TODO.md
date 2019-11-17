@@ -1,0 +1,1 @@
+- [ ] Tratar de meter las IP a través de ENV
