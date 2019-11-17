@@ -1,23 +1,31 @@
-version: "3"
+version: "3.3"
 services:
   web:
-    build: .
-    dockerfile: Dockerfile-web
+    build:
+      context: .
+      dockerfile: Dockerfile-web
     ports:
       - "8080:80"
-    links:
-      - "db:database"
+    depends_on:
+      - db
+    environment:
+      - DB_ADDR=db
     networks:
       - frontend
       - backend
   db:
-    build: .
-    dockerfile: Dodckerfile-db
+    image: postgres
+    volumes:
+      - ./init_pg.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./pg_config:/pg_config
+    configs:
+      - config_file: /pg_config/my-postgresql.conf
+    environment:
+      - POSTGRES_USER:postgres
+      - POSTGRES_PASSWORD:postgres
     networks:
       - backend
 
 networks:
   frontend:
-    name: front
   backend:
-    name: back

