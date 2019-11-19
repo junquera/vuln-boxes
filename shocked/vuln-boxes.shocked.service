@@ -1,0 +1,13 @@
+[Unit]
+Description=Shocked Service (Vuln Boxes)
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStart=/usr/bin/docker-compose \
+          -f /opt/vuln-boxes/shocked/docker-compose.yml up -d
+
+[Install]
+WantedBy=default.target
