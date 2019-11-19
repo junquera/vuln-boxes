@@ -5,16 +5,16 @@ services:
       context: .
       dockerfile: Dockerfile-web
     ports:
-      - "8080:80"
+      - "127.0.0.1:8080:80"
     depends_on:
       - db
     links:
       - db
     networks:
       frontend:
-        ipv4_address: 172.18.0.2
+        ipv4_address: 172.20.0.2
       backend:
-        ipv4_address: 172.18.1.2
+        ipv4_address: 172.20.1.2
   db:
     image: postgres
     volumes:
@@ -24,15 +24,15 @@ services:
       POSTGRES_PASSWORD: postgres
     networks:
       backend:
-        ipv4_address: 172.18.1.3
+        ipv4_address: 172.20.1.3
 networks:
   frontend:
     ipam:
       driver: default
       config:
-        - subnet: "172.18.0.0/24"
+        - subnet: "172.20.0.0/24"
   backend:
     ipam:
       driver: default
       config:
-        - subnet: "172.18.1.0/24"
+        - subnet: "172.20.1.0/24"
