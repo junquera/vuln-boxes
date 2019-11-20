@@ -100,7 +100,7 @@
   host    replication     all             127.0.0.1/32            md5
   host    replication     all             ::1/128                 md5
   # host    shellshock             shellshock             172.0.0.1/0            trust
-  host    all             all             172.18.1.2/31            md5
+  host    all             all             172.20.1.2/31            md5
   host    all             all             0.0.0.0/0             reject
 PG_HBA
 } > $PGDATA/pg_hba.conf
