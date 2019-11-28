@@ -4,7 +4,7 @@
 
 2. Opening `/cgi-bin/howami` you should realize that the flag is in another machine, in another network different than yours.
 
-3. Testing the path with a vulnerability scan tool could let you know what vulnerability explode, but if you have done a good recognition process, just Googling terms like:
+3. Testing the path with a vulnerability scan tool could let you know what vulnerability explode, but if you have done a good enumeration process, just Googling terms like:
 
 - Shocked
 
