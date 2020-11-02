@@ -1,0 +1,13 @@
+FROM php:7.2-apache
+
+RUN apt update && \
+        apt install -y libpq-dev curl ssh && \
+        docker-php-ext-install -j$(nproc) pgsql
+
+RUN useradd tim
+
+COPY config/front/* /var/www/html/
+COPY config/front/dav/dav.conf /etc/apache2/conf-enabled/
+
+RUN a2enmod dav && a2enmod dav_fs
+RUN mkdir /var/www/html/webdav && chown www-data:www-data /var/www/html/webdav
