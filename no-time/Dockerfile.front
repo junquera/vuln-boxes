@@ -9,5 +9,8 @@ RUN useradd tim
 COPY config/front/* /var/www/html/
 COPY config/front/dav/dav.conf /etc/apache2/conf-enabled/
 
+RUN touch /var/www/DavLock
+RUN chown www-data:www-data /var/www/DavLock
+
 RUN a2enmod dav && a2enmod dav_fs
 RUN mkdir /var/www/html/webdav && chown www-data:www-data /var/www/html/webdav
