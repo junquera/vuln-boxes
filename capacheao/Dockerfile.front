@@ -1,0 +1,8 @@
+FROM httpd:2.4.49
+
+
+COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY cgi-scripts/ /usr/local/apache2/cgi-bin/
+# COPY cgi_env /usr/local/apache2/
+
+# RUN chmod 777 /etc/shadow

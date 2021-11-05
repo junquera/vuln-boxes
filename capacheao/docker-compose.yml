@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+    back:
+        build:
+            context: .
+            dockerfile: Dockerfile.back
+        restart: always
+        environment: 
+            POSTGRES_PASSWORD: 6a7d2c621cef4e379818eb585d2aceba
+    front:
+        build:
+            context: .
+            dockerfile: Dockerfile.front
+        restart: always
+        ports:
+                - 8080:80
+        environment:
+            DB_ADDR: back
+            DB_PORT: "5432"
+            DB_NAME: "postgres"
+            DB_USER: "postgres"
+            DB_PASS: "6a7d2c621cef4e379818eb585d2aceba"
