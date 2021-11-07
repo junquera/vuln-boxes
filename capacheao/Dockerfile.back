@@ -1,4 +1,4 @@
-FROM postgres
+FROM postgres:13.4
 
 RUN apt update && apt install -y ssh sudo
 
@@ -16,7 +16,7 @@ COPY config/back/docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d/
 # Inherit https://github.com/docker-library/postgres/blob/8d281112a872380578e37a92a698ce59d66473d7/13/Dockerfile
 COPY config/back/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # We set the default STOPSIGNAL to SIGINT, which corresponds to what PostgreSQL
 # calls "Fast Shutdown mode" wherein new connections are disallowed and any

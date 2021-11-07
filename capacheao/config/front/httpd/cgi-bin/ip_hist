@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+printf "Content-type: text/plain; charset=iso-8859-1\n\n";
+
+PGPASSWORD=$DB_PASS psql -h $DB_ADDR -p $DB_PORT --username=$DB_USER $DB_NAME -w -c "INSERT INTO register(ip) VALUES ('$REMOTE_ADDR');";
+PGPASSWORD=$DB_PASS psql -h $DB_ADDR -p $DB_PORT --username=$DB_USER $DB_NAME -w -c "SELECT * FROM register;";

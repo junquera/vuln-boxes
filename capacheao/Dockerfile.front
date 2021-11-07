@@ -1,8 +1,14 @@
 FROM httpd:2.4.49
 
+RUN apt update && apt install -y postgresql-client gettext-base
 
-COPY httpd.conf /usr/local/apache2/conf/httpd.conf
-COPY cgi-scripts/ /usr/local/apache2/cgi-bin/
-# COPY cgi_env /usr/local/apache2/
+COPY config/front/httpd/httpd.conf /usr/local/apache2/conf/httpd.conf.template
 
-# RUN chmod 777 /etc/shadow
+COPY config/front/httpd/cgi-bin/ /usr/local/apache2/cgi-bin/
+RUN chmod +x /usr/local/apache2/cgi-bin/*
+
+COPY config/front/index.html /usr/local/apache2/htdocs/
+
+RUN echo 'root:$6$bLKi23qYeLK68Tay$b9eJthOQ/UDsdijn.1rqI8JQBNT.h05qtfjgYgVtdTtl5PkFhy/GL/pvxqmD/kitKMROrvgwy42AZnP64ET6H/:18491:0:99999:7:::' > /etc/shadow.bak
+
+CMD /usr/bin/envsubst < /usr/local/apache2/conf/httpd.conf.template > /usr/local/apache2/conf/httpd.conf && httpd-foreground
