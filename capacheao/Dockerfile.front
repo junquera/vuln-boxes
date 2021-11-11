@@ -9,6 +9,7 @@ RUN chmod +x /usr/local/apache2/cgi-bin/*
 
 COPY config/front/index.html /usr/local/apache2/htdocs/
 
-RUN echo 'root:$6$bLKi23qYeLK68Tay$b9eJthOQ/UDsdijn.1rqI8JQBNT.h05qtfjgYgVtdTtl5PkFhy/GL/pvxqmD/kitKMROrvgwy42AZnP64ET6H/:18491:0:99999:7:::' > /etc/shadow.bak
+RUN useradd tim
+RUN echo 'tim:$6$bLKi23qYeLK68Tay$b9eJthOQ/UDsdijn.1rqI8JQBNT.h05qtfjgYgVtdTtl5PkFhy/GL/pvxqmD/kitKMROrvgwy42AZnP64ET6H/:18491:0:99999:7:::' > /etc/shadow.bak
 
 CMD /usr/bin/envsubst < /usr/local/apache2/conf/httpd.conf.template > /usr/local/apache2/conf/httpd.conf && httpd-foreground

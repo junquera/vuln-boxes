@@ -4,8 +4,7 @@ RUN apt update && apt install -y ssh sudo
 
 
 RUN mkdir -p /home/tim
-ENV PASSWORD 6a7d2c621cef4e379818eb585d2aceba
-RUN useradd -d /home/tim -p $(echo $PASSWORD | openssl passwd -1 -stdin) tim
+RUN useradd -d /home/tim -p $(echo monkey | openssl passwd -1 -stdin) tim
 RUN usermod -aG sudo tim
 
 RUN mkdir /run/sshd
