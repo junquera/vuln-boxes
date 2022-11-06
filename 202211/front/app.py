@@ -22,5 +22,4 @@ def get_static(b64path):
     with open(fpath, "rb") as f:
         return f.read()
 
-
-app.run()
+app.run(host="0.0.0.0", debug=True)
