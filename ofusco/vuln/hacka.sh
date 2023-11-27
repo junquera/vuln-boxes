@@ -8,4 +8,4 @@ curl -v --path-as-is 'http://localhost:5000/admin/'$(printf "service ssh start" 
 
 ssh -p 2222 test@localhost
 
-sudo apt install iproute2 nmap
+# sudo apt install iproute2 nmap
