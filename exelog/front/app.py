@@ -1,6 +1,7 @@
 from re import sub
 from flask import Flask, render_template, redirect, url_for, render_template_string,request, send_file
 import io
+import time
 import base64
 import subprocess
 import logging
@@ -39,7 +40,7 @@ def profile():
 def template():
     query = request.args
     with open(query.get('template')) as f:
-        return render_template_string(f.read())
+        return render_template_string(f.read(), time=time.time())
     
 # logging.basicConfig(filename = '/var/log/app.log', level=logging.DEBUG)
 app.run(host="0.0.0.0", debug=True)
