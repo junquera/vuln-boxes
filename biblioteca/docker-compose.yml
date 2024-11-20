@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build: ./front
+    ports:
+      - "2222:22"
+    networks:
+      - frontend
+      - backend
+  backend:
+    build: back
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
