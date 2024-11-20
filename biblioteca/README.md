@@ -1,6 +1,6 @@
 Montar SSH que solo haga prompt de algo, pero que se pueda bypasear, y saltar a otro segmento de red.
 
-admin@localhost con sudo
+ssh admin:monkey@localhost con sudo
 
 sudo da acceso a /etc/shadow
 
